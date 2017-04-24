@@ -1,0 +1,15 @@
+<h1>Alboms</h1>
+
+<?php foreach($alboms as $albom): ?>
+
+<h3>
+  <a href="#">
+    <?= $this->escapeHtml($albom->getName()); ?>
+  </a>    
+</h3>
+        
+<p>    
+   <?= $this->escapeHtml($albom->getImage()); ?>
+</p>
+
+<?php endforeach; ?>
