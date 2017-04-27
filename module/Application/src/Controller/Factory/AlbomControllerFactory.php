@@ -4,6 +4,7 @@ namespace Application\Controller\Factory;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Application\Service\AlbomManager;
+use Application\Service\ImageManager;
 use Application\Controller\AlbomController;
 
 /**
@@ -17,8 +18,9 @@ class AlbomControllerFactory implements FactoryInterface
     {
         $entityManager = $container->get('doctrine.entitymanager.orm_default');
         $albomManager = $container->get(AlbomManager::class);
+        $imageManager = $container->get(ImageManager::class);
         
         // Инстанцируем контроллер и внедряем зависимости
-        return new AlbomController($entityManager, $albomManager);
+        return new AlbomController($entityManager, $albomManager, $imageManager);
     }
 }

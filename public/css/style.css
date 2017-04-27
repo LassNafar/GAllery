@@ -1,5 +1,5 @@
 body {
-    padding-top: 60px;
+    /*padding-top: 60px;*/
     padding-bottom: 40px;
 }
 
@@ -31,3 +31,11 @@ div.container a.navbar-brand > img {
     margin-right: 4px;
     margin-top: -2px;
 }
+
+div.app-caption {
+    padding: 25px 0px;    
+    font-size: 3.0em;
+    font-weight: bold;
+    color: #6aacaf
+}
+

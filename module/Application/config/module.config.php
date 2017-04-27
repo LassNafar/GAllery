@@ -10,12 +10,13 @@ namespace Application;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
+use Application\Route\StaticRoute;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 
 return [
     'router' => [
         'routes' => [
-            'home' => [
+            'gallery' => [
                 'type' => Literal::class,
                 'options' => [
                     'route'    => '/',
@@ -60,6 +61,19 @@ return [
     'service_manager' => [
         'factories' => [
             Service\AlbomManager::class => Service\Factory\AlbomManagerFactory::class,
+            Service\ImageManager::class => InvokableFactory::class,
+        ],
+    ],
+    // The following registers our custom view 
+    // helper classes in view plugin manager.
+    'view_helpers' => [
+        'factories' => [
+            View\Helper\Menu::class => InvokableFactory::class,
+            View\Helper\Breadcrumbs::class => InvokableFactory::class,
+        ],
+        'aliases' => [
+            'mainMenu' => View\Helper\Menu::class,
+            'pageBreadcrumbs' => View\Helper\Breadcrumbs::class,
         ],
     ],
     'view_manager' => [

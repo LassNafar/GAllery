@@ -18,7 +18,7 @@ class AlbomForm extends Form
     public function __construct()
     {
         // Определяем имя формы.
-        parent::__construct('post-form');
+        parent::__construct('albom-form');
      
         // Задает для этой формы метод POST.
         $this->setAttribute('method', 'post');
@@ -47,7 +47,7 @@ class AlbomForm extends Form
             ],
         ]);
         
-        // Добавляем поле "content"
+        // Добавляем поле "image"
         $this->add([
             'type'  => 'file',
             'name' => 'image',
@@ -59,7 +59,7 @@ class AlbomForm extends Form
             ],
         ]);
         
-        // Добавляем поле "tags"
+        // Добавляем поле "authors"
         $this->add([
             'type'  => 'text',
             'name' => 'authors',
@@ -71,7 +71,7 @@ class AlbomForm extends Form
             ],
         ]);
         
-        // Добавляем поле "priority"
+        /*/ Добавляем поле "priority"
         $this->add([
             'type'  => 'text',
             'name' => 'priority',
@@ -81,7 +81,7 @@ class AlbomForm extends Form
             'options' => [
                 'label' => 'Priority',
             ],
-        ]);
+        ]);*/
         
         // Добавляем кнопку отправки формы
         $this->add([
@@ -124,7 +124,7 @@ class AlbomForm extends Form
         
         $inputFilter->add([
                 'type'     => FileInput::class,
-                'name'     => 'file',
+                'name'     => 'image',
                 'required' => true,                           
                 'validators' => [
                     ['name'    => 'FileUploadFile'],

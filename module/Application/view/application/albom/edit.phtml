@@ -1,0 +1,57 @@
+<?php
+$this->headTitle('Albom Add');
+$this->mainMenu()->setActiveItemId('alboms');
+$this->pageBreadcrumbs()->setItems([
+            'Gallery'=>$this->url('gallery'),
+            'Edit Albom'=>$this->url('alboms', ['action'=>'edit'])
+            ]);
+
+$form = $this->form;
+$form->get('name')->setAttributes([
+    'class'=>'form-control', 
+    'placeholder'=>'Enter albom name here'
+    ]);
+$form->get('image')->SetLabel('Выберите файл чтобы изменить обложку альбома');
+$form->get('priority')->setAttributes([
+    'class'=>'form-control', 
+    'placeholder'=>'Enter priority'
+    ]);
+$form->get('submit')->setAttributes(['class'=>'btn btn-primary']);
+$form->get('submit')->setValue('Save');
+$form->prepare();
+
+?>
+
+<h1>Edit Albom</h1>
+
+<p>
+    Please fill out the following form and click the *Save* button.
+</p>
+
+<div class="row">
+    <div class="col-md-6">
+        <?= $this->form()->openTag($form); ?>
+        
+        <div class="form-group">
+            <?= $this->formLabel($form->get('name')); ?>
+            <?= $this->formElement($form->get('name')); ?>
+            <?= $this->formElementErrors($form->get('name')); ?>                  
+        </div>
+        
+        <div class="form-group">
+            <?= $this->formLabel($form->get('image')); ?>
+            <?= $this->formElement($form->get('image')); ?>
+            <?= $this->formElementErrors($form->get('image')); ?>
+        </div>
+        
+        <div class="form-group">
+            <?= $this->formLabel($form->get('priority')); ?>
+            <?= $this->formElement($form->get('priority')); ?>
+            <?= $this->formElementErrors($form->get('priority')); ?>
+        </div>
+        
+        <?= $this->formElement($form->get('submit')); ?>
+        
+        <?= $this->form()->closeTag(); ?>
+    </div>    
+</div>   

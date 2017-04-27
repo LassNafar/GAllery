@@ -4,6 +4,7 @@ namespace Application\Controller\Factory;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 use Application\Controller\IndexController;
+use Application\Service\AlbomManager;
 
 /**
  * Это фабрика для IndexController. Ее целью является инстанцирование
@@ -15,8 +16,9 @@ class IndexControllerFactory implements FactoryInterface
                      $requestedName, array $options = null)
     {
         $entityManager = $container->get('doctrine.entitymanager.orm_default');
+        $albomManager = $container->get(AlbomManager::class);
         
         // Инстанцируем контроллер и внедряем зависимости.
-        return new IndexController($entityManager);
+        return new IndexController($entityManager, $albomManager);
     }
 }

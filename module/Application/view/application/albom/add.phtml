@@ -1,19 +1,19 @@
 <?php
+$this->headTitle('Albom Add');
+$this->mainMenu()->setActiveItemId('alboms');
+$this->pageBreadcrumbs()->setItems([
+            'Gallery'=>$this->url('gallery'),
+            'Add Albom'=>$this->url('alboms', ['action'=>'add'])
+            ]);
+
 $form = $this->form;
 $form->get('name')->setAttributes([
     'class'=>'form-control', 
     'placeholder'=>'Enter albom name here'
     ]);
-//$form->get('image')->setAttributes([
-//    'class'=>'form-control', 
-//   'placeholder'=>'Type content here'
-//    ]);
 $form->get('authors')->setAttributes([
     'class'=>'form-control', 
     'placeholder'=>'comma, separated, list, of, authors'
-    ]);
-$form->get('priority')->setAttributes([
-    'class'=>'form-control'   
     ]);
 $form->get('submit')->setAttributes(['class'=>'btn btn-primary']);
 $form->prepare();
@@ -49,14 +49,14 @@ $form->prepare();
             <p class="help-block">Separate tags with comma.</p>
         </div>
         
-        <div class="form-group">
-            <?= $this->formLabel($form->get('priority')); ?>
-            <?= $this->formElement($form->get('priority')); ?>
-            <?= $this->formElementErrors($form->get('priority')); ?>                  
-        </div>
+        <!--<div class="form-group">
+            <?//= $this->formLabel($form->get('priority')); ?>
+            <?//= $this->formElement($form->get('priority')); ?>
+            <?//= $this->formElementErrors($form->get('priority')); ?>                  
+        </div>-->
         
         <?= $this->formElement($form->get('submit')); ?>
         
         <?= $this->form()->closeTag(); ?>
     </div>    
-</div>   
+</div>

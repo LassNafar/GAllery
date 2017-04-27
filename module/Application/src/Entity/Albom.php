@@ -2,11 +2,12 @@
 namespace Application\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Application\Entity\Author;
+//use Application\Entity\Author;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Этот класс представляет собой альбом.
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="\Application\Repository\AlbomRepository")
  * @ORM\Table(name="albom")
  */
 class Albom 
@@ -72,13 +73,13 @@ class Albom
         $this->name = $name;
     }
 
-    // Возвращает путь к картинке.
+    // Возвращает имя картинки.
     public function getImage() 
     {
         return $this->image;
     }
 
-    // Устанавливает путь к картинке.
+    // Устанавливает имя картинки.
     public function setImage($image) 
     {
         $this->image = $image;
