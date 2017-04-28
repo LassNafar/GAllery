@@ -169,7 +169,7 @@ class AlbomController extends AbstractActionController
                 // Используем менеджер постов, чтобы добавить новый пост в базу данных.                
                 $this->albomManager->addAuthorsToAlbom($data['author'],$albom);
                 
-                // Перенаправляем пользователя на страницу "home".
+                // Перенаправляем пользователя на страницу "gallery".
                 return $this->redirect()->toRoute('gallery');
             }
         }
@@ -234,4 +234,34 @@ class AlbomController extends AbstractActionController
         // Return Response to avoid default view rendering.
         return $this->getResponse();
     }
+    
+    /**
+     * This action displays the "View Albom" page allowing to see the albom name
+     * and content. 
+     */
+    public function viewAction() 
+    {       
+        $albomId = (int)$this->params()->fromRoute('id', -1);
+        
+        // Validate input parameter
+        if ($albomId<0) {
+            $this->getResponse()->setStatusCode(404);
+            return;
+        }
+        
+        // Find the post by ID
+        $albom = $this->entityManager->getRepository(Albom::class)
+                ->findOneById($albomId);
+        
+        if ($albom == null) {
+            $this->getResponse()->setStatusCode(404);
+            return;                        
+        }
+        
+        // Render the view template.
+        return new ViewModel([
+            'albom' => $albom,
+            'albomManager' => $this->albomManager
+        ]);
+    }  
 }

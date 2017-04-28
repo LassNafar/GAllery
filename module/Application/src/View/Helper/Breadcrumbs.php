@@ -2,6 +2,7 @@
 namespace Application\View\Helper;
 
 use Zend\View\Helper\AbstractHelper;
+
 /**
  * This view helper class displays breadcrumbs.
  */

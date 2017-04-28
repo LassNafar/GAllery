@@ -1,0 +1,25 @@
+<?php
+$this->headTitle('Albom View');
+$this->mainMenu()->setActiveItemId('alboms');
+$this->pageBreadcrumbs()->setItems([
+            'Gallery'=>$this->url('gallery'),
+            'Albom'=>$this->url('alboms', ['action'=>'view'])
+            ]);
+?>
+<a href="<?= $this->url('gallery'); ?>">&lt;&lt; Back to list of alboms</a>
+
+<h1>
+    <?= $this->escapeHtml($albom->getName()); ?>    
+</h1>
+<hr>
+    <p>
+        <div class="img-thumbnail">
+            <img src="<?= $this->url('alboms', ['action'=>'file'], 
+                ['query'=>['name'=>$this->escapeHtml($albom->getImage()), 'thumbnail'=>false]]); ?>" >
+        </div>
+    </p>
+<hr>
+    <p>
+        Авторы: <?= $this->escapeHtml($albomManager->convertAuthorsToString($albom)); ?>   
+    </p>
+<hr>

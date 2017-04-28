@@ -50,25 +50,82 @@ return [
                     ],
                 ],
             ],
+            'registration' => [
+                'type'    => Literal::class,
+                'options' => [
+                    'route'    => '/registration',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[a-zA-Z0-9_-]*',
+                    ],
+                    'defaults' => [
+                        'controller'    => Controller\UserController::class,
+                        'action'        => 'index',
+                    ],
+                ],
+            ],
+            'login' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/login',
+                    'defaults' => [
+                        'controller' => Controller\AuthController::class,
+                        'action'     => 'login',
+                    ],
+                ],
+            ],
+            'logout' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/logout',
+                    'defaults' => [
+                        'controller' => Controller\AuthController::class,
+                        'action'     => 'logout',
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => Controller\Factory\IndexControllerFactory::class,
             Controller\AlbomController::class => Controller\Factory\AlbomControllerFactory::class,
+            Controller\AuthController::class => Controller\Factory\AuthControllerFactory::class,
+            Controller\UserController::class => Controller\Factory\UserControllerFactory::class,
         ],
     ],
     'service_manager' => [
         'factories' => [
             Service\AlbomManager::class => Service\Factory\AlbomManagerFactory::class,
             Service\ImageManager::class => InvokableFactory::class,
+            \Zend\Authentication\AuthenticationService::class => Service\Factory\AuthenticationServiceFactory::class,
+            Service\AuthAdapter::class => Service\Factory\AuthAdapterFactory::class,
+            Service\AuthManager::class => Service\Factory\AuthManagerFactory::class,
+            Service\UserManager::class => Service\Factory\UserManagerFactory::class,
+            Service\NavManager::class => Service\Factory\NavManagerFactory::class,
         ],
+    ],
+    'access_filter' => [
+        'options' => [
+            'mode' => 'restrictive'
+        ],
+        'controllers' => [
+            Controller\IndexController::class => [
+                ['actions' => ['index'], 'allow' => '*']
+            ],
+            Controller\AlbomController::class => [
+                ['actions' => ['file', 'view'], 'allow' => '*']
+            ],
+            Controller\UserController::class => [
+                ['actions' => ['index'], 'allow' => '*']
+            ],
+        ]
     ],
     // The following registers our custom view 
     // helper classes in view plugin manager.
     'view_helpers' => [
         'factories' => [
-            View\Helper\Menu::class => InvokableFactory::class,
+            View\Helper\Menu::class => View\Helper\Factory\MenuFactory::class,
             View\Helper\Breadcrumbs::class => InvokableFactory::class,
         ],
         'aliases' => [

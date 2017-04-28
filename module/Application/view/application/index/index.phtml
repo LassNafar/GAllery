@@ -1,6 +1,6 @@
 <?php
 $this->headTitle('Manage Alboms');
-$this->mainMenu()->setActiveItemId('home');
+$this->mainMenu()->setActiveItemId('gallery');
 $this->pageBreadcrumbs()->setItems([
             'Gallery'=>$this->url('gallery'),
             ]);
@@ -13,15 +13,17 @@ $this->pageBreadcrumbs()->setItems([
    <tr>
         <th>Albom Name</th>
         <th>Image</th>
-        <th>Authors</th>  
-        <th>Actions</th>        
+        <th>Authors</th>
+        <?php if ($this->identity()!=null):?>
+        <th>Actions</th>
+        <?php endif;?>
     </tr>
     
     <?php foreach ($alboms as $albom): ?>
     <?php// var_dump($albom);echo "||||||||||||||||||||||||||||"; ?>
     <tr>
         <td>
-            <a href="<?//= $this->url('alboms', ['action'=>'view', 'id'=>$alboms->getId()]); ?>">
+            <a href="<?= $this->url('alboms', ['action'=>'view', 'id'=>$albom->getId()]); ?>">
                 <?= $this->escapeHtml($albom->getName()); ?>
             </a> 
         </td>
@@ -32,6 +34,7 @@ $this->pageBreadcrumbs()->setItems([
             </div>
         </td>
         <td><?= $this->escapeHtml($albomManager->convertAuthorsToString($albom)); ?></td>
+        <?php if ($this->identity()!=null):?>
         <td>
             <a class="btn btn-info" href="<?= $this->url('alboms', 
                     ['action'=>'edit', 'id'=>$albom->getId()]); ?>">
@@ -41,7 +44,8 @@ $this->pageBreadcrumbs()->setItems([
                     ['action'=>'add-author', 'id'=>$albom->getId()]); ?>">
                 <span class="glyphicon glyphicon-pencil" ></span> Add Author
             </a>
-        </td>    
+        </td>
+        <?php endif;?>
     </tr>
         
     <?php endforeach; ?>   
